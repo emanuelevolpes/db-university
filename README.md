@@ -1,4 +1,6 @@
 # DB University
+
+## 21/04
 1. Selezionare tutti gli studenti nati nel 1990 (160)
     - SELECT * FROM `students` WHERE `date_of_birth` LIKE '1990%'; 
 
@@ -22,3 +24,39 @@
 
 8. Quanti sono gli insegnanti che non hanno un numero di telefono? (50)
     - SELECT * FROM `teachers` WHERE `phone` IS NULL; 
+
+## 26/04
+## GROUP BY
+1. Contare quanti iscritti ci sono stati ogni anno
+    - SELECT YEAR(`enrolment_date`) AS 'anno d\'iscrizione', COUNT(id) AS 'iscritti' FROM `students` GROUP BY YEAR(`enrolment_date`); 
+
+2. Contare gli insegnanti che hanno l'ufficio nello stesso edificio
+    - SELECT `office_number`, COUNT(id) FROM `teachers` GROUP BY `office_number`; 
+
+3. Calcolare la media dei voti di ogni appello d'esame
+    - SELECT AVG(`vote`), `exam_id` FROM `exam_student` GROUP BY `exam_id`; 
+
+4. Contare quanti corsi di laurea ci sono per ogni dipartimento
+    - SELECT `department_id` AS 'dipartimento', COUNT(id) AS 'corsi di laurea' FROM `degrees` GROUP BY `department_id`; 
+
+## JOIN
+1. Selezionare tutti gli studenti iscritti al Corso di Laurea in Economia
+    - SELECT * FROM `students` JOIN `degrees` ON `degrees`.`id` = `students`.`degree_id` WHERE `degrees`.`name` = 'corso di laurea in economia'; 
+
+2. Selezionare tutti i Corsi di Laurea Magistrale del Dipartimento di Neuroscienze
+    - SELECT * FROM `departments` JOIN `degrees` ON `degrees`.`department_id` = `departments`.`id` WHERE `degrees`.`level` = 'magistrale' AND `departments`.`name` = 'dipartimento di neuroscienze'; 
+
+3. Selezionare tutti i corsi in cui insegna Fulvio Amato (id=44)
+    - SELECT * FROM `teachers` JOIN `course_teacher` ON `teachers`.`id` = `course_teacher`.`teacher_id` WHERE `teachers`.`id` = 44; 
+
+4. Selezionare tutti gli studenti con i dati relativi al corso di laurea a cui sono iscritti e il relativo dipartimento, in ordine alfabetico per cognome e nome
+    - 
+
+5. Selezionare tutti i corsi di laurea con i relativi corsi e insegnanti
+    - 
+
+6. Selezionare tutti i docenti che insegnano nel Dipartimento di Matematica (54)
+    - 
+
+7. BONUS: Selezionare per ogni studente quanti tentativi d’esame ha sostenuto per superare ciascuno dei suoi esami
+    - 
